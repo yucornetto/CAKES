@@ -23,35 +23,35 @@ Please refer to [TRN](https://github.com/zhoubolei/TRN-pytorch) for data prepara
   |CAKES<sup>C</sup><sub>1,2D</sub> 8 frame       | 46.8     |  76.0    |
   |CAKES<sup>P</sup><sub>2,3D</sub> 8 frame       | 47.4     |  76.1    |
   |CAKES<sup>P</sup><sub>1,2,3D</sub> 8 frame  | 47.2    |  75.7    |
-  |CAKES<sup>C</sup><sub>1,2D</sub> 8 frame       | 48.0     |  78.0    |
-  |CAKES<sup>P</sup><sub>2,3D</sub> 8 frame       | 48.6     |  78.6    |
-  |CAKES<sup>P</sup><sub>1,2,3D</sub> 8 frame  | 49.4    |  78.4    |
+  |CAKES<sup>C</sup><sub>1,2D</sub> 16 frame       | 48.0     |  78.0    |
+  |CAKES<sup>P</sup><sub>2,3D</sub> 16 frame       | 48.6     |  78.6    |
+  |CAKES<sup>P</sup><sub>1,2,3D</sub> 16 frame  | 49.4    |  78.4    |
   
  * results are reported based on center crop  and 1 clip sampling. 
 
-### Searching
+## Searching
 Please refer to the following commands for searching CAKES. We use 8 GPUs to construct all experiments.
-#### CAKES<sup>C</sup><sub>1,2D</sub>
+### CAKES<sup>C</sup><sub>1,2D</sub>
 ```
 CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 python main.py --root_path PATH_TO_DATASET --dataset somethingv1 --checkpoint_dir PATH_TO_SAVE_CKPT --type I3D --arch resnet50 --num_segments 8 -b 96 --lr 0.04 --op_code conv1_2d -sr --s 0.0001 --search --reweight
 ```
-#### CAKES<sup>P</sup><sub>1,2D</sub>
+### CAKES<sup>P</sup><sub>1,2D</sub>
 ```
 CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 python main.py --root_path PATH_TO_DATASET --dataset somethingv1 --checkpoint_dir PATH_TO_SAVE_CKPT --type I3D --arch resnet50 --num_segments 8 -b 96 --lr 0.04 --search --op_code conv1_2d_dropout --epochs 140 --lr_steps 100 120
 ```
-#### CAKES<sup>C</sup><sub>2,3D</sub>
+### CAKES<sup>C</sup><sub>2,3D</sub>
 ```
 CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 python main.py --root_path PATH_TO_DATASET --dataset somethingv1 --checkpoint_dir PATH_TO_SAVE_CKPT --type I3D --arch resnet50 --num_segments 8 -b 96 --lr 0.04 --op_code convst -sr --s 0.0001 --search --reweight
 ```
-#### CAKES<sup>P</sup><sub>2,3D</sub>
+### CAKES<sup>P</sup><sub>2,3D</sub>
 ```
 CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 python main.py --root_path PATH_TO_DATASET --dataset somethingv1 --checkpoint_dir PATH_TO_SAVE_CKPT --type I3D --arch resnet50 --num_segments 8 -b 96 --lr 0.04 --search --op_code convst_dropout --epochs 140 --lr_steps 100 120
 ```
-#### CAKES<sup>C</sup><sub>1,2,3D</sub>
+### CAKES<sup>C</sup><sub>1,2,3D</sub>
 ```
 CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 python main.py --root_path PATH_TO_DATASET --dataset somethingv1 --checkpoint_dir PATH_TO_SAVE_CKPT --type I3D --arch resnet50 --num_segments 8 -b 96 --lr 0.04 --op_code conv1_2_3d -sr --s 0.0001 --search --reweight
 ```
-#### CAKES<sup>P</sup><sub>1,2,3D</sub>
+### CAKES<sup>P</sup><sub>1,2,3D</sub>
 ```
 CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 python main.py --root_path PATH_TO_DATASET --dataset somethingv1 --checkpoint_dir PATH_TO_SAVE_CKPT --type I3D --arch resnet50 --num_segments 8 -b 96 --lr 0.04 --search --op_code conv1_2_3d_dropout --epochs 140 --lr_steps 100 120
 ```
@@ -62,21 +62,21 @@ python main.py --root_path PATH_TO_DATASET --dataset somethingv1 --checkpoint_di
 ```
 The configuration will be saved to ./conv_config.txt, and you can copy it to config.py where all configurations are saved in a dictionary.
 
-### Training
+## Training
 Please refer to the following commands for training and evaluating the searched networks. We use 8 GPUs to construct all experiments. You can choose OP_CODE among conv1_2d, convst, conv1_2_3d. CONV_CONFIG refers to the key in dictionary saved in config.py
 ```
 CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 python main.py --root_path PATH_TO_DATASET --dataset somethingv1 --checkpoint_dir PATH_TO_SAVE_CKPT --type I3D --arch resnet50 --num_segments 8 -b 96 --lr 0.04 --op_code OP_CODE --conv_config CONV_CONFIG
 ```
 
-### Testing
+## Testing
 You can test CAKES with the provided checkpoints using following commands:
 
-#### 8frame
+### 8frame
 Testing Results: Prec@1 47.240 Prec@5 75.673 Loss 2.39457
 
 ```CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 python main.py --root_path PATH_TO_DATASET --dataset somethingv1 --checkpoint_dir PATH_TO_SAVE_CKPT --type I3D --arch resnet50 --num_segments 8 -b 96 --lr 0.04 --op_code conv1_2_3d --conv_config CAKES123D_P --resume ./ckpt/8frame_CAKES123D_PerformancePriority.tar --evaluate```
 
-#### 16frame
+### 16frame
 Testing Results: Prec@1 49.410 Prec@5 78.363 Loss 2.27473
 
 ```CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 python main.py --root_path PATH_TO_DATASET --dataset somethingv1 --checkpoint_dir PATH_TO_SAVE_CKPT --type I3D --arch resnet50 --num_segments 16 -b 96 --lr 0.04 --op_code conv1_2_3d --conv_config CAKES123D_P --resume ./ckpt/16frame_CAKES123D_PerformancePriority.tar --evaluate```
