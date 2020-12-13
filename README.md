@@ -22,10 +22,10 @@ Please refer to [TRN](https://github.com/zhoubolei/TRN-pytorch) for data prepara
   |------------------------------| -------------| -------------|
   |CAKES<sup>C</sup><sub>1,2D</sub> 8 frame       | 46.8     |  76.0    |
   |CAKES<sup>P</sup><sub>2,3D</sub> 8 frame       | 47.4     |  76.1    |
-  |CAKES<sup>P</sup><sub>1,2,3D</sub> 8 frame  | 47.2    |  75.7    |
+  |[CAKES<sup>P</sup><sub>1,2,3D</sub>](https://drive.google.com/file/d/1LeBYBLnEQKyvbCuvC4u3N5QBkMho6qtH/view?usp=sharing) 8 frame  | 47.2    |  75.7    |
   |CAKES<sup>C</sup><sub>1,2D</sub> 16 frame       | 48.0     |  78.0    |
   |CAKES<sup>P</sup><sub>2,3D</sub> 16 frame       | 48.6     |  78.6    |
-  |CAKES<sup>P</sup><sub>1,2,3D</sub> 16 frame  | 49.4    |  78.4    |
+  |[CAKES<sup>P</sup><sub>1,2,3D</sub>](https://drive.google.com/file/d/1L62a_TQwCoFC2fK6jv5N0tbilRUupIj_/view?usp=sharing) 16 frame  | 49.4    |  78.4    |
   
  * results are reported based on center crop  and 1 clip sampling. 
 
