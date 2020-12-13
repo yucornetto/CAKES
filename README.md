@@ -18,7 +18,7 @@ The code is tested under enviroment with TITAN RTX, CUDA 10.1, PyTorch 1.0
 Please refer to [TRN](https://github.com/zhoubolei/TRN-pytorch) for data preparation on Something-Something dataset.
 
 ## Model Zoo:
-  |                              | Top-1 | Top-5 |
+  |                              | SSV1 Top-1 | SSV1 Top-5 |
   |------------------------------| -------------| -------------|
   |CAKES<sup>C</sup><sub>1,2D</sub> 8 frame       | 46.8     |  76.0    |
   |CAKES<sup>P</sup><sub>2,3D</sub> 8 frame       | 47.4     |  76.1    |
