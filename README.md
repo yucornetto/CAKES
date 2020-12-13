@@ -74,12 +74,16 @@ You can test CAKES with the provided checkpoints using following commands:
 ### 8frame
 Testing Results: Prec@1 47.240 Prec@5 75.673 Loss 2.39457
 
-```CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 python main.py --root_path PATH_TO_DATASET --dataset somethingv1 --checkpoint_dir PATH_TO_SAVE_CKPT --type I3D --arch resnet50 --num_segments 8 -b 96 --lr 0.04 --op_code conv1_2_3d --conv_config CAKES123D_P --resume ./ckpt/8frame_CAKES123D_PerformancePriority.tar --evaluate```
+```
+CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 python main.py --root_path PATH_TO_DATASET --dataset somethingv1 --checkpoint_dir PATH_TO_SAVE_CKPT --type I3D --arch resnet50 --num_segments 8 -b 96 --lr 0.04 --op_code conv1_2_3d --conv_config CAKES123D_P --resume ./ckpt/8frame_CAKES123D_PerformancePriority.tar --evaluate
+```
 
 ### 16frame
 Testing Results: Prec@1 49.410 Prec@5 78.363 Loss 2.27473
 
-```CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 python main.py --root_path PATH_TO_DATASET --dataset somethingv1 --checkpoint_dir PATH_TO_SAVE_CKPT --type I3D --arch resnet50 --num_segments 16 -b 96 --lr 0.04 --op_code conv1_2_3d --conv_config CAKES123D_P --resume ./ckpt/16frame_CAKES123D_PerformancePriority.tar --evaluate```
+```
+CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 python main.py --root_path PATH_TO_DATASET --dataset somethingv1 --checkpoint_dir PATH_TO_SAVE_CKPT --type I3D --arch resnet50 --num_segments 16 -b 96 --lr 0.04 --op_code conv1_2_3d --conv_config CAKES123D_P --resume ./ckpt/16frame_CAKES123D_PerformancePriority.tar --evaluate
+```
 
 
 ## Citation
