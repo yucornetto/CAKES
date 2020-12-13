@@ -56,12 +56,10 @@ class ConvST(nn.Module):
         self.C_per_convs = OrderedDict()
         if conv_config is None:
             self.C_per_convs['kxkxk'] = self.C_per_conv0
-            self.C_per_convs['1xkxk'] = self.C_per_conv1
-            #self.C_per_convs = {'kxkxk':self.C_per_conv0, '1xkxk':self.C_per_conv1}
+            self.C_per_convs['1xkxk'] = self.C_per_conv1       
         else:
             self.C_per_convs['kxkxk'] = conv_config['kxkxk']
             self.C_per_convs['1xkxk'] = conv_config['1xkxk']
-            #self.C_per_convs = conv_config
 
         self.convs = nn.ModuleList()
         if self.C_per_convs['kxkxk'] > 0:
@@ -103,7 +101,7 @@ class ConvST(nn.Module):
 
         start_index = 0
         mask = weight_copy.ge(thre)
-        keep_index = {}#OrderedDict()
+        keep_index = {}
         for k in self.C_per_convs:
             print('Operation: ', k)
             print('Channel Before Pruning:', self.C_per_convs[k])
@@ -135,7 +133,6 @@ class ConvST(nn.Module):
             print('Operation: ', k)
             print('Channel Before Pruning:', self.C_per_convs[k])
             keep_num = mask[start_index:start_index+self.C_per_convs[k]].sum()
-            #keep_num = weight_copy[start_index:start_index+self.C_per_convs[k]].ge(thre).sum()
             print('Channel After Pruning:', keep_num)
 
             start_index += self.C_per_convs[k]
@@ -177,7 +174,6 @@ class ConvST_Dropout(nn.Module):
         self.norm = PruneBN(C_out*2)
 
         self.out = nn.Sequential(
-            #PruneBN(C_out),
             nn.ReLU(inplace=True),
         )
     def forward(self, x):
@@ -230,7 +226,6 @@ class ConvST_Dropout(nn.Module):
             xs.append(x1)
 
         x = torch.cat(xs, dim = 1)
-        ### check the bn momentum issue https://pytorch.org/docs/stable/_modules/torch/nn/modules/batchnorm.html#BatchNorm3d
         x = F.batch_norm(x, self.norm.running_mean[keep_channels_norm], self.norm.running_var[keep_channels_norm], norm_weight, norm_bias, \
             self.norm.training or not self.norm.track_running_stats, self.norm.momentum, self.norm.eps)
         x = self.out(x)
@@ -650,7 +645,6 @@ class Conv1_2_3D(nn.Module):
             self.C_per_convs['kxkxk'] = self.C_per_conv0
             self.C_per_convs['1xkxk'] = self.C_per_conv1
             self.C_per_convs['kx1x1'] = self.C_per_conv2
-            #self.C_per_convs = {'kxkxk':self.C_per_conv0, '1xkxk':self.C_per_conv1, 'kx1x1': self.C_per_conv2}
         else:
             self.C_per_convs = conv_config
 
@@ -743,7 +737,6 @@ class Conv1_2D_Dropout(nn.Module):
         self.norm = PruneBN(C_out*2)
 
         self.out = nn.Sequential(
-            #PruneBN(C_out),
             nn.ReLU(inplace=True),
         )
     def forward(self, x):
@@ -779,7 +772,6 @@ class Conv1_2D_Dropout(nn.Module):
             xs.append(x1)
 
         x = torch.cat(xs, dim = 1)
-        ### check the bn momentum issue https://pytorch.org/docs/stable/_modules/torch/nn/modules/batchnorm.html#BatchNorm3d
         x = F.batch_norm(x, self.norm.running_mean[keep_channels], self.norm.running_var[keep_channels], norm_weight, norm_bias, \
             self.norm.training or not self.norm.track_running_stats, self.norm.momentum, self.norm.eps)
         x = self.out(x)
@@ -848,7 +840,6 @@ class Conv1_2_3D_Dropout(nn.Module):
         self.norm = PruneBN(C_out*3)
 
         self.out = nn.Sequential(
-            #PruneBN(C_out),
             nn.ReLU(inplace=True),
         )
     def forward(self, x):
@@ -894,7 +885,6 @@ class Conv1_2_3D_Dropout(nn.Module):
             xs.append(x2)
 
         x = torch.cat(xs, dim = 1)
-        ### check the bn momentum issue https://pytorch.org/docs/stable/_modules/torch/nn/modules/batchnorm.html#BatchNorm3d
         x = F.batch_norm(x, self.norm.running_mean[keep_channels], self.norm.running_var[keep_channels], norm_weight, norm_bias, \
             self.norm.training or not self.norm.track_running_stats, self.norm.momentum, self.norm.eps)
         x = self.out(x)

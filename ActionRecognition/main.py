@@ -148,12 +148,6 @@ def main():
 		prec1 = validate(val_loader, model, criterion, 0)
 		is_best = prec1 > best_prec1
 		best_prec1 = max(prec1, best_prec1)
-		# save_checkpoint({
-		# 		'epoch': args.start_epoch,
-		# 		'arch': args.arch,
-		# 		'state_dict': model.state_dict(),
-		# 		'best_prec1': best_prec1,
-		# 	}, is_best)
 		exit()
 
 		return

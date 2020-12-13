@@ -24,9 +24,6 @@ class Bottleneck(nn.Module):
 		super(Bottleneck, self).__init__()
 		self.conv1 = nn.Conv3d(inplanes, planes, kernel_size=1, bias=False)
 		self.bn1 = nn.BatchNorm3d(planes)
-		# self.conv2 = nn.Conv3d(planes, planes, kernel_size=(1,3,3), stride=(1,stride,stride),
-		# 					   padding=(0,1,1), bias=False)
-		# self.bn2 = nn.BatchNorm3d(planes)
 
 		if op_code == 'conv3d':
 			expand_ratio = 1
