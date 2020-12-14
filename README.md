@@ -9,15 +9,15 @@
 This repository contains the code for our AAAI2021 paper [CAKES: Channel-wise Automatic KErnel Shrinking for Efficient 3D Networks](https://arxiv.org/abs/2003.12798). In this paper, we propose CAKES as an efficient alternative to 3D convolution. The key principle is to simpliy a 3D convolution layer at channel-level. Each 3D kernel is replaced by its efficient sub-kernel, enbaling operations deployed in every layer to be heterogeneous, so that they can extract diverse and complementary information to benefit the learning process. It also allows a more general and flexible replacement design to generlize to both spatial-temporal and volumetreic data. Furthermore, we propose a new search space based on CAKES, so that the replacement configuration can be determined automatically. Experiments show that CAKES could obtain a better accuracy-cost trade-off compared to other operations.
 
 
-## Dependencies:
+## Dependencies
 
 The code is tested under enviroment with TITAN RTX, CUDA 10.1, PyTorch 1.0
 
-## Dataset:
+## Dataset
 
 Please refer to [TRN](https://github.com/zhoubolei/TRN-pytorch) for data preparation on Something-Something dataset.
 
-## Model Zoo:
+## Model Zoo
   |                              | SSV1 Top-1 | SSV1 Top-5 |
   |------------------------------| -------------| -------------|
   |CAKES<sup>C</sup><sub>1,2D</sub> 8 frame       | 46.8     |  76.0    |
@@ -97,5 +97,5 @@ If you find this work or code useful for your research, please use the following
 }
 ```
 
-## Acknowledgements:
+## Acknowledgements
 This codebase is build upon [TRN](https://github.com/zhoubolei/TRN-pytorch), [TSN](https://github.com/yjxiong/tsn-pytorch) and [GST](https://github.com/chenxuluo/GST-video).
